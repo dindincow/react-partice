@@ -1,8 +1,9 @@
 import React,{Component} from 'react';
 import TodoListUI from './store/TodoListUI'
 import store from './store';
-import {getInputChangeAction,getAddItemAction,getItemDeleteAction} from './store/actionCreator'
+import {getInputChangeAction,getAddItemAction,getItemDeleteAction,getInitListAction,getTodoList} from './store/actionCreator'
 //import {CHANGE_INPUT_VALUE,ADD_TODO_ITEM,DELETE_TODO_ITEM} from './store/actionTypes'
+import axios from 'axios';
 class TodoList extends Component{
     constructor(props){
         super(props);     
@@ -38,6 +39,11 @@ class TodoList extends Component{
         //     index
         // }
         const action = getItemDeleteAction(index)
+        store.dispatch(action)
+    }
+    componentDidMount(){
+        const action = getTodoList();
+        console.log('action=>',action)
         store.dispatch(action)
     }
     render(){
